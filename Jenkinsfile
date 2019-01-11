@@ -11,7 +11,7 @@ node {
     registryHost = "127.0.0.1:30400/"
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
-    yamlContent = load("externalMethod.groovy") 
+    yamlContent = load("applications/${appName}/k8s/deployment.yaml") 
     
     stage "Build"
     
