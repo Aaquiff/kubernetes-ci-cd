@@ -21,8 +21,8 @@ node {
         sh "docker push ${imageName}"
 
     stage "Deploy"
-        sh "sed 's/#TAG#/${tag}/' applications/${appName}/k8s/deployment.yaml > applications/${appName}/k8s/deployment.yaml"
-        sh "sed 's/#TAG#/${tag}/' applications/${appName}/k8s/manual-deployment.yaml > applications/${appName}/k8s/manual-deployment.yaml"
+        sh "sed 's/<IMAGE_NAME>/${imageName}/' applications/${appName}/k8s/deployment.yaml > applications/${appName}/k8s/deployment.yaml"
+        sh "sed 's/<IMAGE_NAME>/${imageName}/' applications/${appName}/k8s/manual-deployment.yaml > applications/${appName}/k8s/manual-deployment.yaml"
         kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
 
 }
