@@ -23,6 +23,8 @@ node {
     stage "Deploy"
         sh "sed 's/<IMAGE_NAME>/${imageName}/' applications/${appName}/k8s/deployment.yaml > applications/${appName}/k8s/deployment.yaml"
         sh "sed 's/<IMAGE_NAME>/${imageName}/' applications/${appName}/k8s/manual-deployment.yaml > applications/${appName}/k8s/manual-deployment.yaml"
+        def yamlContent = load("externalMethod.groovy") 
+        echo ${yamlContent}
         kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
 
 }
