@@ -21,7 +21,7 @@ node {
         sh "docker push ${imageName}"
 
     stage "Deploy"
-        sh "sed 's/#TAG#/${tag}/' applications/${appName}/k8s/*.yaml > applications/${appName}/k8s/*.yaml'"
+        sh "sed 's/#TAG#/${tag}/' applications/${appName}/k8s/*.yaml > applications/${appName}/k8s/*.yaml"
         kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
 
 }
