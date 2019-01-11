@@ -11,6 +11,7 @@ node {
     registryHost = "127.0.0.1:30400/"
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
+    env.BUILD_TAG=tag
 
     stage "Build"
     
@@ -21,7 +22,9 @@ node {
         sh "docker push ${imageName}"
 
     stage "Deploy"
-
+        // sh "sed 's/$BUILD_TAG/${tag}' applications/${appName}/k8s/deployment.yaml > applications/${appName}/k8s/deployment.yaml"
+        // sh "sed 's/$BUILD_TAG/${tag}' applications/${appName}/k8s/manual-deployment.yaml > applications/${appName}/k8s/manual-deployment.yaml"
+        
         kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
 
 }
