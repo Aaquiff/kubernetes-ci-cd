@@ -59,11 +59,15 @@ data:
   kubectl-config-context.sh: |-
     #!/bin/bash -v
 
-    kubectl config set-credentials jenkins --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-    kubectl config set-cluster minikube --server=https://`kubectl cluster-info | grep 'Kubernetes master' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\:[0-9]\{1,4\}'` --certificate-authority="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-    kubectl config set-context jenkins-minikube --cluster=minikube --user=jenkins --namespace=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-    kubectl config use-context jenkins-minikube
-    chmod 755 ~/.kube/config
+    # kubectl config set-credentials jenkins --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    # # kubectl config set-cluster minikube --server=https://`kubectl cluster-info | grep 'Kubernetes master' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\:[0-9]\{1,4\}'` --certificate-authority="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+    # kubectl config set-cluster minikube --server=https://192.168.99.100 --certificate-authority="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+
+    # kubectl config set-context jenkins-minikube --cluster=minikube --user=jenkins --namespace=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+    # kubectl config use-context jenkins-minikube
+
+
+    # chmod 755 ~/.kube/config
 
 ---
 
